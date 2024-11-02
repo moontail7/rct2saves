@@ -1,0 +1,24 @@
+name: Auto Commit
+
+on:
+  push:
+    branches:
+      - main  # Change to your default branch if it's not 'main'
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */12 * * *'  # Runs every 12 hours at the start of the hour
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Auto-commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Auto-commit of file changes"
+          branch: main  # Change to your default branch if it's not 'main'
